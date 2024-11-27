@@ -47,7 +47,7 @@ Future<void> addTodo(Todo todo) async {
   print('Status Code: ${response.statusCode}');
   print('Response Body: ${response.body}');
 
-  if (response.statusCode == 201) { // 201: Created
+  if (response.statusCode == 201) { // 201 sucess hogya else fail to add in api
     print('Todo added successfully');
   } else {
     print('Failed to add todo: ${response.body}');

@@ -4,6 +4,7 @@ import '../bloc/todo_bloc.dart';
 import '../bloc/todo_event.dart';
 import '../bloc/todo_state.dart';
 import '../models/todo.dart';
+import '../theme/theme_styles.dart';
 
 class TodoScreen extends StatelessWidget {
   final _controller = TextEditingController();
@@ -15,33 +16,17 @@ class TodoScreen extends StatelessWidget {
   title: const Center(
     child: Text(
       'To-Do List',
-      style: TextStyle(
-        fontSize: 24,              
-        fontWeight: FontWeight.w600, 
-        color: Colors.white,        
-        letterSpacing: 1.2,         
-        fontFamily: 'Roboto',       
-      ),
+      style: ThemeStyles.appBarTitleStyle,
     ),
   ),
-  backgroundColor: Colors.deepPurple, 
-  elevation: 6.0, 
-  actions: [
-    IconButton(
-      icon: Icon(Icons.brightness_3_outlined, color: Colors.white), // Icon to add tasks
-      onPressed: () {
-        // Add action here
-      },
-    ),
-  ],
+  backgroundColor: ThemeStyles.primaryColor,
+  elevation: 6.0,
   shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.vertical(
-      bottom: Radius.circular(20), 
+      bottom: Radius.circular(20),
     ),
   ),
-  automaticallyImplyLeading: false, 
-)
-,
+),
       body: BlocBuilder<TodoBloc, TodoState>(
         builder: (context, state) {
           if (state is TodoLoading) {
@@ -54,40 +39,37 @@ class TodoScreen extends StatelessWidget {
                 return ListTile(
   title: Text(
     todo.title,
-    style: TextStyle(
-      color: Colors.deepPurple,
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-    ),
+    style: ThemeStyles.listTileTitleStyle,
   ),
   trailing: IconButton(
-    icon: Icon(
+    icon: const Icon(
       Icons.delete,
-      color: Colors.deepPurple,
+      color: ThemeStyles.primaryColor,
     ),
     onPressed: () {
       context.read<TodoBloc>().add(DeleteTodo(todo.id));
     },
   ),
-  tileColor: Colors.white,
+  tileColor: ThemeStyles.secondaryColor,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(15),
   ),
-  contentPadding: EdgeInsets.symmetric(
-    horizontal: 20, 
+  contentPadding: const EdgeInsets.symmetric(
+    horizontal: 20,
     vertical: 10,
   ),
   visualDensity: VisualDensity.compact,
-  leading: Icon(
+  leading: const Icon(
     Icons.task_alt,
-    color: Colors.deepPurple,
+    color: ThemeStyles.primaryColor,
   ),
 );
+
 
               },
             );
           } else {
-            return Center(child: Text('Error fetching data.'));
+            return const Center(child: Text('Check Your WiFi/data.'));
           }
         },
       ),
@@ -96,7 +78,7 @@ class TodoScreen extends StatelessWidget {
           showDialog(
             context: context,
             builder: (_) => AlertDialog(
-              title: Text('Add Todo'),
+              title: const Text('Add Todo'),
               content: TextField(controller: _controller),
               actions: [
                 TextButton(
@@ -106,13 +88,13 @@ class TodoScreen extends StatelessWidget {
                     _controller.clear();
                     Navigator.pop(context);
                   },
-                  child: Text('Add'),
+                  child: const Text('Add'),
                 ),
               ],
             ),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
