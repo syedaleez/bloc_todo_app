@@ -62,4 +62,30 @@ Future<void> addTodo(Todo todo) async {
   Future<void> deleteTodo(String id) async {
     await http.delete(Uri.parse('$baseUrl/$id'));
   }
+
+
+
+  //newwwwwwww
+  // class TodoApi {
+  // final String baseUrl = 'https://crudcrud.com/api/<your-token>/todos';
+
+  // Future<void> deleteTodo(String id) async {
+  //   final response = await http.delete(Uri.parse('$baseUrl/$id'));
+  //   if (response.statusCode != 200 && response.statusCode != 204) {
+  //     throw Exception('Failed to delete todo');
+  //   }
+  // }
+
+  Future<void> updateTodo(String id, Todo todo) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/$id'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(todo.toJson()),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update todo');
+    }
+  }
 }
+
+

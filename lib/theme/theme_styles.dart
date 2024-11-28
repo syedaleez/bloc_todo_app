@@ -12,6 +12,7 @@ class ThemeStyles {
     fontWeight: FontWeight.bold,
     letterSpacing: 1.2,
   );
+  //not 
 
   static const TextStyle listTileTitleStyle = TextStyle(
     color: primaryColor,

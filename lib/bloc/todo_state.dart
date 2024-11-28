@@ -1,10 +1,6 @@
-import 'package:equatable/equatable.dart';
 import '../models/todo.dart';
 
-abstract class TodoState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+abstract class TodoState {}
 
 class TodoLoading extends TodoState {}
 
@@ -13,5 +9,7 @@ class TodoLoaded extends TodoState {
   TodoLoaded(this.todos);
 }
 
-class TodoError extends TodoState {}
-
+class TodoError extends TodoState {
+  final String message;
+  TodoError(this.message);
+}
