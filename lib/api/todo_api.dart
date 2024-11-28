@@ -21,7 +21,9 @@ Future<List<Todo>> fetchTodos() async {
   if (response.statusCode == 200) {
     final List<dynamic> jsonData = jsonDecode(response.body);
     return jsonData.map((data) => Todo.fromJson(data)).toList();
-  } else {
+  } 
+  
+  else {
     print('Failed to load todos: ${response.statusCode}');
     throw Exception('Failed to load todos');
   }
